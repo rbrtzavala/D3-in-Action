@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+  </head>
+  <body>
+    <div id="vizcontainer">    </div>
+    <script>
+    /*** Loading Data ***/
+      // d3.csv() and d3.json() use the same format,
+      // declare a path to the file being loaded and
+      // a callback function passing in the data retrieved.
+
+      // Both load file data as an array of JSON objects.
+      // For csv() the array is data
+      d3.csv("./data/cities.csv", (data) => console.log(data));
+      // For json() the array is at data.tweets
+      d3.json("./data/tweets.json", (data) => console.log(data));
+
+      d3.json("./data/tweets.json", (data) => {
+        var tweetData = data.tweets;
+        var nestedTweets = d3.nest()
+          .key(function(el) {return el.user})
+          .entries(tweetData);
+          console.log(nestedTweets);
+      });
+    </script>
+  </body>
+</html>
