@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+  </head>
+  <body>
+    <script>
+      d3.csv("./data/cities.csv", (error, data) => { dataViz(data); });
+
+      function dataViz(incomingData) {
+        d3.select("body").selectAll("div.cities")
+          // Each city associated with DOM elem selected
+          .data(incomingData)
+          .enter()
+          .append("div")
+          .attr("class", "cities")
+          .html(function(d, i) { return d.label });
+      }
+    </script>
+  </body>
+</html>
